@@ -86,7 +86,7 @@ def getGuess(alreadyGuessed):
 
 def playAgain():
 # This function returns True if the player wants to play again;otherwise, it returns False.
-# 这个函数返回是否继续游戏
+# 这个函数询问玩家是否继续游戏
     print('Do you want to play again? (yes or no)')
     return input().lower().startswith('y')
 
