@@ -53,11 +53,11 @@ words = {'Colors':'red orange yellow green blue indigo violet white black brown'
 'Animals':'bat bear beaver cat cougar crab deer dog donkey duck eagle fish frog goat leech lion lizard monkey moose mouse otter owl panda python rabbit rat shark sheep skunk squid tiger turkey turtle weasel whale wolf wombat zebra'.split()}
 
 def getRandomWord(wordDict):
-    # This function returns a random string from the passed from the passed dictionary of lists of lists of strings and its key.
-    # First, randomly select a key from the dictionary:
+    # This function returns a random string from the passed from the passed dictionary of lists of lists of strings and its key. //此函数从传递的字符串列表列表及其 key 的传递字典中返回一个随机字符串。
+    # First, randomly select a key from the dictionary: //首先，从字典中随机选择一个 key： 
     wordKey = random.choice(list(wordDict.keys()))
 
-    # Second,randomly select a word from the key's list in the dictionary:
+    # Second,randomly select a word from the key's list in the dictionary:其次，从字典的 key 列表中随机选择一个单词：
     wordIndex = random.randint(0, len(wordDict[wordKey]) - 1)
     
     return [wordDict[wordKey][wordIndex], wordKey]
@@ -105,7 +105,7 @@ def playAgain():
 
 
 print('H A N G M A N')
-difficulty = ''
+difficulty = 'X'
 while difficulty not in 'EMH':
      print('Enter difficulty: E - Easy, M - Medium, H - Hard')
      difficulty = input().upper()

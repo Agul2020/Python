@@ -33,8 +33,8 @@
 
 ## 4.Hangman
   ```
-  +---+
-O   |
+   +---+
+   O   |
 /|\  |
 / \  |
 ===
@@ -55,3 +55,18 @@ O   |
 - upper() 转换为大写
 - startswith() 检查开头的布尔函数 
 - endswith()  检查结尾的布尔函数
+
+<br />
+<br />
+
+## 5.Hangman 扩展
+
+- 字典是无序的，列表是有序的
+- `choice()` 接受一个列表作为参数，并从列表中返回一个随机值
+- ` wordKey = random.choice(list(wordDict.keys()))`  
+ &emsp;&emsp;将字典的 `keys` 返回为一个列表，通过 `random.choice()` 得到一个随机的 `key` 赋值给`wordKey`。这就实现了在多组单词中随机选择一组的功能。
+- `wordIndex = random.randint(0, len(wordDict[wordKey]) - 1)`  
+  &emsp;&emsp;`wordDict[wordKey]` 返回字典中 `wordKey` 所对应的值，即返回一组单词。因为一组单词就是一个列表，用 `len()` 返回该列表的长度。然后，`random.randint()` 返回一个随机数赋值给 `wordIndex`
+
+- `return [wordDict[wordKey][wordIndex], wordKey]`  
+&emsp;&emsp;最后返回的是字典中一个 `key` 所对应的 `value` 中的一个 `值`和 `key`组成的列表。也就是所有单词中的一组词汇中的一个`单词` 和 `这组单词的名称`这两个结果。  
