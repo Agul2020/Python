@@ -5,7 +5,7 @@ MAX_GUESS = 10 # 玩家所能够猜测的次数
 
 def getSecretNum():
     # Returns a string of unique random digits that is NUM_DIGITS long.
-    numbers = list(range(10)) # numbers 时包含0~9的一个列表 
+    numbers = list(range(10)) # numbers 是包含0~9的一个列表 
     random.shuffle(numbers) # 随机修改列表元素的顺序
     secretNum = '' # secretNum 包含了一个字符串而不是一个整数
     for i in range(NUM_DIGITS):
