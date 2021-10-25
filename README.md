@@ -95,7 +95,7 @@
 - 字符串连接只能把两个字符串组合起来。
 - 字符串插值也叫字符串格式化 （string formatting）
 
-## 7.Sonar Treasure Hunt 游戏
+## 8.Sonar Treasure Hunt 游戏
 
 -  `round( x [, n]  )`     
     x -- 数值表达式。   
