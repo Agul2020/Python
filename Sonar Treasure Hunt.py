@@ -1,31 +1,31 @@
 # Sonar Treasure Hunt
 
 import random
-import sys
+import sys 
 import math
 
-def getNewBoard():
-    # Create a new 60x15 board data structure.
+def getNewBoard(): # 创建一个新的游戏板
+    # Create a new 60x15 board data structure. 
     board = []
     for x in range(60): # The main list is a list of 60 lists.
         board.append([])
         for y in range(15): # Each list in the main list has 15 single-character strings.
-            # Use different characters for the ocean to make it more readable.
+            # Use different characters for the ocean to make it more readable. 
             if random.randint(0, 1) == 0:
                 board[x].append('~')
             else:
                 board[x].append('`')
     return board
 
-def drawBoard(board):
+def drawBoard(board): # 绘制游戏板
     # Draw the board data structure.
-    tensDigitsLine = '    ' # Initial space for the numbers down the left side of the board
+    tensDigitsLine = '    ' # Initial space for the numbers down the left side of the board 这个地方有 4 个空格
     for i in range(1, 6):
-        tensDigitsLine += (' ' * 9) + str(i)
+        tensDigitsLine += (' ' * 9) + str(i) # 第一次循环时 tensDigitsLine 有 13 个空格和 1 ，之后每次在后面加 9 个空格和数字 i
 
     # Print the numbers across the top of the board.
     print(tensDigitsLine)
-    print('   ' + ('0123456789' * 6))
+    print('   ' + ('0123456789' * 6)) # 这个地方有 3 个空格
     print()
 
     # Print each of the 15 rows.
@@ -48,20 +48,20 @@ def drawBoard(board):
     print(' ' + ('0123456789' * 6))
     print(tensDigitsLine)
 
-def getRandomChests(numChests):
+def getRandomChests(numChests): # 创建随机的宝箱
     # Create a list of chest data structures (two-item lists of x, y int coordinates).
     chests = []
     while len(chests) < numChests:
         newChest = [random.randint(0, 59), random.randint(0, 14)]
-        if newChest not in chests: # Make sure a chest is not already here.
+        if newChest not in chests: # Make sure a chest is not already here. 保证宝箱的位置不会重复
             chests.append(newChest)
     return chests
 
-def isOnBoard(x, y):
+def isOnBoard(x, y): # 判断一次移动是否有效
     # Return True if the coordinates are on the board; otherwise, return False.
     return x >= 0 and x <= 59 and y >= 0 and y <= 14
 
-def makeMove(board, chests, x, y):
+def makeMove(board, chests, x, y): # 在游戏板上进行一次移动
     # Change the board data structure with a sonar device character.Remove treasure chests from the chests list as they are found.
     # Return False if this is an invalid move.
     # Otherwise, return the string of the result of this move.
@@ -72,11 +72,11 @@ def makeMove(board, chests, x, y):
         if distance < smallestDistance: # We want the closest treasure chest.
             smallestDistance = distance
 
-    smallestDistance = round(smallestDistance)
+    smallestDistance = round(smallestDistance) # 将最短距离取整数部分
 
     if smallestDistance == 0:
         # xy is directly on a treasure chest!
-        chests.remove([x, y])
+        chests.remove([x, y]) # 删除猜对的宝藏
         return 'You have found a sunken treasure chest!'
     else:
         if smallestDistance < 10:
@@ -86,7 +86,7 @@ def makeMove(board, chests, x, y):
             board[x][y] = 'X'
             return 'Sonar did not detect anything. All treasure chests out of range.'
 
-def enterPlayerMove(previousMoves):
+def enterPlayerMove(previousMoves): # 获取玩家的移动
     # Let the player enter their move. Return a two-item list of int xy coordinates.
     print('Where do you want to drop the next sonar device? (0-59 0-14)(or type quit)')
     while True:
@@ -97,14 +97,14 @@ def enterPlayerMove(previousMoves):
 
         move = move.split()
         if len(move) == 2 and move[0].isdigit() and move[1].isdigit() and isOnBoard(int(move[0]), int(move[1])):
-            if [int(move[0]), int(move[1])] in previousMoves:
+            if [int(move[0]), int(move[1])] in previousMoves: # 判断声纳位置是否重复
                 print('You already moved there.')
-                continue
+                continue # 使程序回到 while 循环的开始处
             return [int(move[0]), int(move[1])]
 
         print('Enter a number from 0 to 59, a space, then a number from 0 to 14.')
 
-def showInstructions():
+def showInstructions(): # 为玩家打印出游戏说明
     print('''Instructions:
 You are the captain of the Simon, a treasure-hunting ship. Your current
     mission
@@ -168,17 +168,17 @@ Press enter to continue...''')
 
 print('S O N A R !')
 print()
-print('Would you like to view the instructions? (yes/no)')
+print('Would you like to view the instructions? (yes/no)') # 询问玩家是否要查看游戏说明
 if input().lower().startswith('y'):
     showInstructions()
 
 while True:
     # Game setup
-    sonarDevices = 20
-    theBoard = getNewBoard()
-    theChests = getRandomChests(3)
-    drawBoard(theBoard)
-    previousMoves = []
+    sonarDevices = 20 # 玩家还剩下的声纳设备（轮次）的数目
+    theBoard = getNewBoard() # 这个游戏使用的游戏板数据结构
+    theChests = getRandomChests(3) # 宝藏箱数据结构的列表。 getRandomChests()函数将会返回一个列表，表示游戏板上随机放置的 3 个宝藏箱
+    drawBoard(theBoard) 
+    previousMoves = [] # 玩家在这个游戏中所做的所有 x 和 y 移动的列表
 
     while sonarDevices > 0:
         # Show sonar device and chest statuses.
@@ -187,14 +187,14 @@ while True:
         x, y = enterPlayerMove(previousMoves)
         previousMoves.append([x, y]) # We must track all moves so that sonar devices can be updated.
 
-        moveResult = makeMove(theBoard, theChests, x, y)
+        moveResult = makeMove(theBoard, theChests, x, y) # 将声纳的坐标传递至 makeMove() 函数来计算最短位置
         if moveResult == False:
             continue
         else:
             if moveResult == 'You have found a sunken treasure chest!':
                 # Update all the sonar devices currently on the map.
                 for x, y in previousMoves:
-                    makeMove(theBoard, theChests, x, y)
+                    makeMove(theBoard, theChests, x, y) # 由于发现了一个宝藏 所以声纳所探测到的最短位置会发生变化 所以要将声纳的坐标传递至 makeMove() 函数来重新计算最短位置
             drawBoard(theBoard)
             print(moveResult)
 
@@ -213,5 +213,5 @@ while True:
 
     print('Do you want to play again? (yes or no)')
     if not input().lower().startswith('y'):
-        sys.exit()
+        sys.exit() # 终止程序运行
 
