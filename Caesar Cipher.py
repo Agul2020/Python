@@ -2,7 +2,7 @@
 SYMBOLS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
 MAX_KEY_SIZE = len(SYMBOLS)
 
-def getMode():
+def getMode(): # 决定加密还是解密
     while True:
         print('Do you wish to encrypt or decrypt a message?')
         mode = input().lower()
@@ -11,20 +11,20 @@ def getMode():
         else:
             print('Enter either "encrypt" or "e" or "decrypt" or "d".')
 
-def getMessage():
+def getMessage(): # 从玩家处得到消息 
     print('Enter your message:')
     return input()
 
-def getKey():
+def getKey(): # 从玩家处得到密钥
     key = 0
-    while True:
+    while True: 
         print('Enter the key number (1-%s)' % (MAX_KEY_SIZE))
         key = int(input())
         if (key >= 1 and key <= MAX_KEY_SIZE):
             return key
 
-def getTranslatedMessage(mode, message, key):
-    if mode[0] == 'd':
+def getTranslatedMessage(mode, message, key): # 加密或解密消息
+    if mode[0] == 'd': 
         key = -key
     translated = ''
 
