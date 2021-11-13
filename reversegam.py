@@ -1,9 +1,9 @@
 # Reversegam: a clone of Othello/Reversi
 import random
 import sys
-WIDTH = 8 # Board is 8 spaces wide.
-HEIGHT = 8 # Board is 8 spaces tall.
-def drawBoard(board):
+WIDTH = 8 # Board is 8 spaces wide. /设置游戏板的宽度
+HEIGHT = 8 # Board is 8 spaces tall. /设置游戏板的高度
+def drawBoard(board):# 在屏幕上绘制游戏板数据结构
     # Print the board passed to this function. Return None.
     print('  12345678')
     print(' +--------+')
@@ -15,14 +15,14 @@ def drawBoard(board):
     print(' +--------+')
     print('  12345678')
 
-def getNewBoard():
+def getNewBoard(): # 创建一个新的游戏板数据结构 （空白的游戏板）
     # Create a brand-new, blank board data structure.
     board = []
     for i in range(WIDTH):
         board.append([' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '])
     return board
 
-def isValidMove(board, tile, xstart, ystart):
+def isValidMove(board, tile, xstart, ystart): # 判断一次落子是否有效
     # Return False if the player's move on space xstart, ystart is invalid.
     # If it is a valid move, return a list of spaces that would become the player's if they made a move here.
     if board[xstart][ystart] != ' ' or not isOnBoard(xstart, ystart):
@@ -34,8 +34,7 @@ def isValidMove(board, tile, xstart, ystart):
         otherTile = 'X'
 
     tilesToFlip = []
-    for xdirection, ydirection in [[0, 1], [1, 1], [1, 0], [1, -1],
-        [0, -1], [-1, -1], [-1, 0], [-1, 1]]:
+    for xdirection, ydirection in [[0, 1], [1, 1], [1, 0], [1, -1],[0, -1], [-1, -1], [-1, 0], [-1, 1]]:
         x, y = xstart, ystart
         x += xdirection # First step in the x direction
         y += ydirection # First step in the y direction
@@ -43,7 +42,7 @@ def isValidMove(board, tile, xstart, ystart):
             # Keep moving in this x & y direction.
             x += xdirection
             y += ydirection
-            if isOnBoard(x, y) and board[x][y] == tile:
+            if isOnBoard(x, y) and board[x][y] == tile: # 发现是否有可以反转的棋子
                 # There are pieces to flip over. Go in the reverse direction until we reach the original space, noting all the tiles along the way.
                 while True:
                     x -= xdirection
@@ -56,11 +55,11 @@ def isValidMove(board, tile, xstart, ystart):
         return False
     return tilesToFlip
 
-def isOnBoard(x, y):
+def isOnBoard(x, y): #判断有效的坐标
     # Return True if the coordinates are located on the board.
     return x >= 0 and x <= WIDTH - 1 and y >= 0 and y <= HEIGHT - 1
 
-def getBoardWithValidMoves(board, tile):
+def getBoardWithValidMoves(board, tile): #得到所有有效移动的一个列表
     # Return a new board with periods marking the valid moves the player can make.
     boardCopy = getBoardCopy(board)
 
@@ -77,7 +76,7 @@ def getValidMoves(board, tile):
                 validMoves.append([x, y])
     return validMoves
 
-def getScoreOfBoard(board):
+def getScoreOfBoard(board): #计算游戏板的得分
     # Determine the score by counting the tiles. Return a dictionary with keys 'X' and 'O'.
     xscore = 0
     oscore = 0
@@ -87,9 +86,9 @@ def getScoreOfBoard(board):
                 xscore += 1
             if board[x][y] == 'O':
                 oscore += 1
-    return {'X':xscore, 'O':oscore}
+    return {'X':xscore, 'O':oscore} # 返回到一个字典中
 
-def enterPlayerTile():
+def enterPlayerTile(): # 获取玩家的棋子选择
     # Let the player enter which tile they want to be.
     # Return a list with the player's tile as the first item and the computer's tile as the second.
     tile = ''
@@ -103,14 +102,14 @@ def enterPlayerTile():
     else:
         return ['O', 'X']
 
-def whoGoesFirst():
+def whoGoesFirst(): # 决定谁先走
     # Randomly choose who goes first.
     if random.randint(0, 1) == 0:
         return 'computer'
     else:
         return 'player'
 
-def makeMove(board, tile, xstart, ystart):
+def makeMove(board, tile, xstart, ystart): # 在游戏板上落下一个棋子
     # Place the tile on the board at xstart, ystart and flip any of the opponent's pieces.
     # Return False if this is an invalid move; True if it is valid.
     tilesToFlip = isValidMove(board, tile, xstart, ystart)
@@ -123,7 +122,7 @@ def makeMove(board, tile, xstart, ystart):
         board[x][y] = tile
     return True
 
-def getBoardCopy(board):
+def getBoardCopy(board): # 复制游戏板数据结构
     # Make a duplicate of the board list and return it.
     boardCopy = getNewBoard()
 
@@ -133,11 +132,11 @@ def getBoardCopy(board):
 
     return boardCopy
 
-def isOnCorner(x, y):
+def isOnCorner(x, y): # 判断一个格子是否在角上
     # Return True if the position is in one of the four corners.
     return (x == 0 or x == WIDTH - 1) and (y == 0 or y == HEIGHT - 1)
 
-def getPlayerMove(board, playerTile):
+def getPlayerMove(board, playerTile): # 获取玩家的移动（并检查这个移动是否有效）
     # Let the player enter their move.
     # Return the move as [x, y] (or return the strings 'hints' or 'quit').
     DIGITS1TO8 = '1 2 3 4 5 6 7 8'.split()
@@ -160,18 +159,18 @@ def getPlayerMove(board, playerTile):
 
     return [x, y]
 
-def getComputerMove(board, computerTile):
+def getComputerMove(board, computerTile): # 获取计算机的移动
     # Given a board and the computer's tile, determine where to
     # move and return that move as an [x, y] list.
     possibleMoves = getValidMoves(board, computerTile)
-    random.shuffle(possibleMoves) # Randomize the order of the moves.
+    random.shuffle(possibleMoves) # Randomize the order of the moves. / 打乱列表中的移动顺序
 
-    # Always go for a corner if available.
+    # Always go for a corner if available. / 角移动策略
     for x, y in possibleMoves:
         if isOnCorner(x, y):
             return [x, y]
 
-    # Find the highest-scoring move possible.
+    # Find the highest-scoring move possible. / 获取最高得分的移动的列表
     bestScore = -1
     for x, y in possibleMoves:
         boardCopy = getBoardCopy(board)
@@ -182,12 +181,12 @@ def getComputerMove(board, computerTile):
             bestScore = score
     return bestMove
 
-def printScore(board, playerTile, computerTile):
+def printScore(board, playerTile, computerTile): # 在屏幕上打印分数
     scores = getScoreOfBoard(board)
     print('You: %s points. Computer: %s points.' % (scores[playerTile],
         scores[computerTile]))
 
-def playGame(playerTile, computerTile):
+def playGame(playerTile, computerTile): # 开始游戏
     showHints = False
     turn = whoGoesFirst()
     print('The ' + turn + ' will go first.')
@@ -198,7 +197,7 @@ def playGame(playerTile, computerTile):
     board[3][4] = 'O'
     board[4][3] = 'O'
     board[4][4] = 'X'
-
+    # 检查僵局
     while True:
         playerValidMoves = getValidMoves(board, playerTile)
         computerValidMoves = getValidMoves(board, computerTile)
@@ -206,7 +205,7 @@ def playGame(playerTile, computerTile):
         if playerValidMoves == [] and computerValidMoves == []:
             return board # No one can move, so end the game.
 
-        elif turn == 'player': # Player's turn
+        elif turn == 'player': # Player's turn / 运行玩家的轮次
             if playerValidMoves != []:
                 if showHints:
                     validMovesBoard = getBoardWithValidMoves(board,
@@ -227,7 +226,7 @@ def playGame(playerTile, computerTile):
                     makeMove(board, playerTile, move[0], move[1])
             turn = 'computer'
 
-        elif turn == 'computer': # Computer's turn
+        elif turn == 'computer': # Computer's turn / 运行计算机的轮次
             if computerValidMoves != []:
                 drawBoard(board)
                 printScore(board, playerTile, computerTile)
@@ -238,7 +237,7 @@ def playGame(playerTile, computerTile):
             turn = 'player'
 
 
-
+#游戏循环
 print('Welcome to Reversegam!')
 
 playerTile, computerTile = enterPlayerTile()
@@ -246,7 +245,7 @@ playerTile, computerTile = enterPlayerTile()
 while True:
     finalBoard = playGame(playerTile, computerTile)
 
-    # Display the final score.
+    # Display the final score. / 显示最终得分
     drawBoard(finalBoard)
     scores = getScoreOfBoard(finalBoard)
     print('X scored %s points. O scored %s points.' % (scores['X'],
