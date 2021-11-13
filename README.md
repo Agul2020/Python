@@ -118,6 +118,7 @@
 - 短路求值——对于 `or` 和 `and` 操作符当左边的布尔值已经可以决定整体的布尔值时，右边的语句将不会执行。
 <br />
 <br />
+
 ## 7.推理游戏 Bagels
 
 - `random.shufle()` 函数随机修改元素顺序。
@@ -133,6 +134,7 @@
 - 字符串插值也叫字符串格式化 （string formatting）
 <br />
 <br />
+
 ## 8.Sonar Treasure Hunt 游戏
 
 -  `round( x [, n]  )`     
