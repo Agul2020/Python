@@ -310,5 +310,12 @@
   -1
   ```
 
+<br />
+<br />
+
+## 贪吃蛇小游戏
+  -  [Python 贪吃蛇小游戏](https://hub.fastgit.org/Agul2020/Python/tree/main/snake)。
+
+
 
 
