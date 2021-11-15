@@ -14,9 +14,41 @@
 - `==` 是比较操作符，用于判断值是否相等，与 `!=` 相对
 - 布尔数据类型只有两个值：`True` 或者 `False` 这两个值的首字母必须大写，值的剩余部分必须小写。
 - `if` 语句：如果 `if` 语句的计算条件为 `True`, `if` 语句块后面的代码将会运行。如果该条件为 `False` 那么执行将会跳过 if 语句块中的代码。
-- `break` 语句只会出现在循环语句中，用于跳出循环。
+- `break` 语句只会出现在循环语句中，用于跳出循环。   
+    实例：
 
-
+  ```
+  n = 5
+  while n > 0:
+      n -= 1
+      if n == 2:
+          break
+      print(n)
+  print('循环结束。')
+  ```
+  运行结果：
+  ```
+  4
+  3
+  循环结束。
+  ```
+- continue 语句被用来告诉 Python 跳过当前循环块中的剩余语句，然后继续进行下一轮循环。   
+实例：
+  ```
+  n = 5
+  while n > 0:
+      n -= 1
+      if n == 2:
+          break
+      print(n)
+  print('循环结束。')
+  ```
+    运行结果：
+  ```
+  4
+  3
+  循环结束。
+  ```
 <br />
 <br />
 
@@ -78,7 +110,22 @@
 - Python 列表是基于 0 索引的 (zero-indexed)
 - `in` 操作符可以告诉我们，一个值是否在一个列表中。使用 `in` 操作符的表达式会返回一个布尔值
 - 在 `if-slif-else` 的语句中，**有且只有一个**语句块会执行
-
+- **访问列表里的值**   
+    实例：
+  
+  ```
+  list = ['red', 'green', 'blue', 'yellow', 'white', 'black']
+  print( list[0] )
+  print( list[1] )
+  print( list[2] )
+  ```
+  运行结果：
+  ```
+  red
+  green
+  blue
+  ```
+  
 - 字符串方法
 
     |方法名         | 作用               |
@@ -105,7 +152,44 @@
   &emsp;&emsp;`wordDict[wordKey]` 返回字典中 `wordKey` 所对应的值，即返回一组单词。因为一组单词就是一个列表，用 `len()` 返回该列表的长度。然后，`random.randint()` 返回一个随机数赋值给 `wordIndex`
 
 - `return [wordDict[wordKey][wordIndex], wordKey]`  
-&emsp;&emsp;最后返回的是字典中一个 `key` 所对应的 `value` 中的一个 `值`和 `key`组成的列表。也就是所有单词中的一组词汇中的一个`单词` 和 `这组单词的名称`这两个结果。  
+&emsp;&emsp;最后返回的是字典中一个 `key` 所对应的 `value` 中的一个 `值`和 `key`组成的列表。也就是所有单词中的一组词汇中的一个`单词` 和 `这组单词的名称`这两个结果。
+- **访问字典里的值**  
+  实例：  
+  ```
+  dict = {'Name': 'Agul', 'Age': 7, 'Class': 'First'}
+  print ("dict['Name']: ", dict['Name'])
+  print ("dict['Age']: ", dict['Age'])
+  ```
+  运行结果：
+  ```
+  dict['Name']:  Agul
+  dict['Age']:  7
+  ```
+- **字典键的特性**  
+1）不允许同一个键出现两次。创建时如果同一个键被赋值两次，后一个值会被记住，如下实例：
+  ```
+  dict = {'Name': 'agul', 'Age': 7, 'Name': '阿古茹'}
+  
+  print ("dict['Name']: ", dict['Name'])
+  ```  
+    以上代码的输出结果：
+  ```
+  dict['Name']:  阿古茹
+  ```
+   2）键必须不可变，所以可以用数字，字符串或元组充当，而用列表就不行，如下实例：
+  ```
+  dict = {['Name']: 'agul', 'Age': 7}
+ 
+  print ("dict['Name']: ", dict['Name'])
+  ```
+  以上实例输出结果：
+  ```
+  Traceback (most recent call last):
+    File "test.py", line 2, in <module>
+      dict = {['Name']: 'agul', 'Age': 7}
+  TypeError: unhashable type: 'list'
+  ```
+
 <br />
 <br />
 
@@ -116,21 +200,68 @@
 - `cheess = spam` 这个列表并没有被复制，复制的是对这个列表的引用。字典也已相同的方式工作。
 - 如果想让 `spam` 和 `cheese` 存储两个不同的列表，就必须创建两个不同的列表，而不是复制一个引用。
 - `return board[move] == ' '` 返回一个布尔值
-- 短路求值——对于 `or` 和 `and` 操作符当左边的布尔值已经可以决定整体的布尔值时，右边的语句将不会执行。
+- 短路求值——对于 `or` 和 `and` 操作符当左边的布尔值已经可以决定整体的布尔值时，右边的语句将不会执行。   
+实例：
+
+  ```
+  def ReturnsTrue():
+    print('ReturnsTrue() was called.')
+    return True
+  def ReturnsFalse():
+      print('ReturnFalse() was called.')
+      return False
+  print('and 操作')
+  ReturnsTrue() or ReturnsFalse()
+  print('or 操作')
+  ReturnsTrue() and ReturnsFalse()
+  ```
+  运行结果：
+  ```
+  and 操作
+  ReturnsTrue() was called.
+  or 操作
+  ReturnsTrue() was called.
+  ReturnFalse() was called.
+  ```
+
 <br />
 <br />
 
 ## 7.推理游戏 Bagels
 
-- `random.shufle()` 函数随机修改元素顺序。
-- `sort()` 是一个方法，它按照字母顺序或数字顺序重新排列列表中的元素。
-- 以上两个都是“就地”修改 。
+- `random.shufle()` 函数随机修改元素顺序。  
+  实例：
+  ```
+  import random
+  number = list(range(12))
+  print('打乱前'+str(number))
+  random.shuffle(number)
+  print('打乱后'+str(number))
+  ```
+  运行结果：
+  ```
+  打乱前[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+  打乱后[10, 3, 7, 8, 11, 9, 2, 0, 5, 6, 1, 4]
+  ```
+- `sort()` 是一个方法，它按照字母顺序或数字顺序重新排列列表中的元素。   
+实例：
+  ```
+  number = [9,1,2,5,4,7,0]
+  number.sort()
+  print(number)
+  ```
+  运行结果：
+  ```
+  [0, 1, 2, 4, 5, 7, 9]
+  ```
 
+- 以上两个都是“就地”修改 。    
 - 字符串方法 `join()` 将字符串列表连接起来，作为一个单个的字符串返回。
 - `join()` 就像是与 `split()` 相反的字符串方法。 `split()` 方法通过分割字符串而返回一个列表，而 `join()` 返回组合列表而得到一个字符串。
 - 像 `%s` 这样的占位符叫做转换说明符（convertion specifiers）。一旦放入了转换说明符，我们就可以在字符串末尾放置所有的变量名称。 每个 `%s` 都会背代码行末尾的一个变量所替换。
 - 变量数目必须和 `%s` 转换说明符的数目相同。
 - 插值对于任意数据类型都是有效的，而不仅仅是对字符串有效。所有值都会自动转换为字符串数据类型。
+
 - 字符串连接只能把两个字符串组合起来。
 - 字符串插值也叫字符串格式化 （string formatting）
 <br />
@@ -141,7 +272,20 @@
 -  `round( x [, n]  )`     
     x -- 数值表达式。   
     n -- 数值表达式，表示从小数点位数。     
-     当参数 n 不存在时，round()函数的输出为整数
+     当参数 n 不存在时，round()函数的输出为整数   
+     n的值可以是负数，表示在整数位部分四舍五入，但结果仍是**浮点数**。    
+     实例：
+     ```
+     print(round(123.45))
+     print(round(123.45,0))
+     print(round(123.45,-1))
+     ```
+    运行结果：
+    ```
+    123
+    123.0
+    120.0
+    ```
 
 - `sprt()` 用于求一个数字的平方根
 - `exit()` 该函数立即终止程序执行
@@ -154,7 +298,17 @@
 
 ## 9.凯撒密码
 
-- `find()` 方法：在第一次出现后就停止查找.
+- `find()` 方法：在第一次出现后就停止查找. 如果没有找到所传递的字符串，`find()` 方法返回 `-1`  
+  实例：
+  ```
+  print('Hello world'.find('l'))
+  print('Python is good!'.find('f'))
+  ```
+  运行结果：
+  ```
+  2
+  -1
+  ```
 
 
 
