@@ -27,14 +27,14 @@
   print('循环结束。')
   ```
   运行结果：
-  ```
+  ```python
   4
   3
   循环结束。
   ```
 - continue 语句被用来告诉 Python 跳过当前循环块中的剩余语句，然后继续进行下一轮循环。   
 实例：
-  ```
+  ```PYTHON
   n = 5
   while n > 0:
       n -= 1
@@ -44,7 +44,7 @@
   print('循环结束。')
   ```
     运行结果：
-  ```
+  ```python
   4
   3
   循环结束。
@@ -113,7 +113,7 @@
 - **访问列表里的值**   
     实例：
   
-  ```
+  ```python
   list = ['red', 'green', 'blue', 'yellow', 'white', 'black']
   print( list[0] )
   print( list[1] )
@@ -155,7 +155,7 @@
 &emsp;&emsp;最后返回的是字典中一个 `key` 所对应的 `value` 中的一个 `值`和 `key`组成的列表。也就是所有单词中的一组词汇中的一个`单词` 和 `这组单词的名称`这两个结果。
 - **访问字典里的值**  
   实例：  
-  ```
+  ```python
   dict = {'Name': 'Agul', 'Age': 7, 'Class': 'First'}
   print ("dict['Name']: ", dict['Name'])
   print ("dict['Age']: ", dict['Age'])
@@ -167,7 +167,7 @@
   ```
 - **字典键的特性**  
 1）不允许同一个键出现两次。创建时如果同一个键被赋值两次，后一个值会被记住，如下实例：
-  ```
+  ```python
   dict = {'Name': 'agul', 'Age': 7, 'Name': '阿古茹'}
   
   print ("dict['Name']: ", dict['Name'])
@@ -177,7 +177,7 @@
   dict['Name']:  阿古茹
   ```
    2）键必须不可变，所以可以用数字，字符串或元组充当，而用列表就不行，如下实例：
-  ```
+  ```python
   dict = {['Name']: 'agul', 'Age': 7}
  
   print ("dict['Name']: ", dict['Name'])
@@ -203,7 +203,7 @@
 - 短路求值——对于 `or` 和 `and` 操作符当左边的布尔值已经可以决定整体的布尔值时，右边的语句将不会执行。   
 实例：
 
-  ```
+  ```python
   def ReturnsTrue():
     print('ReturnsTrue() was called.')
     return True
@@ -231,7 +231,7 @@
 
 - `random.shufle()` 函数随机修改元素顺序。  
   实例：
-  ```
+  ```python
   import random
   number = list(range(12))
   print('打乱前'+str(number))
@@ -245,7 +245,7 @@
   ```
 - `sort()` 是一个方法，它按照字母顺序或数字顺序重新排列列表中的元素。   
 实例：
-  ```
+  ```python
   number = [9,1,2,5,4,7,0]
   number.sort()
   print(number)
@@ -275,7 +275,7 @@
      当参数 n 不存在时，round()函数的输出为整数   
      n的值可以是负数，表示在整数位部分四舍五入，但结果仍是**浮点数**。    
      实例：
-     ```
+     ```python
      print(round(123.45))
      print(round(123.45,0))
      print(round(123.45,-1))
@@ -300,7 +300,7 @@
 
 - `find()` 方法：在第一次出现后就停止查找. 如果没有找到所传递的字符串，`find()` 方法返回 `-1`  
   实例：
-  ```
+  ```python
   print('Hello world'.find('l'))
   print('Python is good!'.find('f'))
   ```
