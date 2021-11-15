@@ -17,7 +17,7 @@
 - `break` 语句只会出现在循环语句中，用于跳出循环。   
     实例：
 
-  ```
+  ```python linenums="1"
   n = 5
   while n > 0:
       n -= 1
