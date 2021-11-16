@@ -103,18 +103,18 @@ def show_text(screen, pos, text, color, font_bold = False, font_size = 60, font_
 def main():
     pygame.init()
     screen_size = (SCREEN_X,SCREEN_Y)
-    screen = pygame.display.set_mode(screen_size)
-    pygame.display.set_caption('Snake')
-    clock = pygame.time.Clock()
-    scores = 0
-    isdead = False
+    screen = pygame.display.set_mode(screen_size) # 设置 pygame 窗口
+    pygame.display.set_caption('Snake') # 设置窗口的标题
+    clock = pygame.time.Clock() # 创建一个时钟对象来帮我们确定游戏要以多大的帧数运行
+    scores = 0 # 分值
+    isdead = False # snake 是否死亡
     
     # 蛇/食物
     snake = Snake()
     food = Food()
     
     while True:
-        for event in pygame.event.get():
+        for event in pygame.event.get(): # 从队列中获取事件
             if event.type == pygame.QUIT:
                 sys.exit()
             if event.type == pygame.KEYDOWN:
@@ -124,14 +124,14 @@ def main():
                     return main()
                 
             
-        screen.fill((255,255,255))
+        screen.fill((255,255,255)) #用于填充窗口的背景色，RGB(255,255,255) 表示白色
         
         # 画蛇身 / 每一步+1分
         if not isdead:
             scores+=1
             snake.move()
         for rect in snake.body:
-            pygame.draw.rect(screen,(20,220,39),rect,0)
+            pygame.draw.rect(screen,(20,220,39),rect,0) # 在屏幕上画出 RGB(20,220,39) 的绿色方块表示 snake 的身体 
             
         # 显示死亡文字
         isdead = snake.isdead()
@@ -153,7 +153,7 @@ def main():
         # 显示分数文字
         show_text(screen,(50,500),'Scores: '+str(scores),(223,223,223))
         
-        pygame.display.update()
+        pygame.display.update() # 它仅允许屏幕的一部分进行更新，而不是整个区域。如果未传递任何参数，则它将更新整个Surface区域
         clock.tick(10)
     
     
